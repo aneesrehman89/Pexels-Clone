@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "./Loader";
- import { ToastContainer, toast,Bounce } from "react-toastify";
- import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = ({ images, loader, setSaved, saved }) => {
   const saveImage = (img) => {
@@ -11,10 +11,7 @@ const Home = ({ images, loader, setSaved, saved }) => {
       for (let i = 0; i < saved.length; i++) {
         if (saved[i].id === img.id) {
           flag = false;
-          //react-toastify
-          // console.log("Image is alredy exist");
-
-          toast.info("Image alredy saved", {
+          toast.info("Image already saved", {
             position: "top-right",
             autoClose: 1500,
             hideProgressBar: false,
@@ -31,7 +28,6 @@ const Home = ({ images, loader, setSaved, saved }) => {
     }
     if (flag) {
       setSaved([...saved, img]);
-      // console.log("Image Saved");
       toast.success("Image Saved", {
         position: "top-right",
         autoClose: 1500,
@@ -45,16 +41,17 @@ const Home = ({ images, loader, setSaved, saved }) => {
       });
     }
   };
+
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="container-fluid text-center" id="top">
         {loader ? (
           <Loader />
         ) : (
           <>
             <div className="flex">
-              {images.map((image) => (
+              {images.slice(0, 12).map((image) => ( // Show only first 12 images
                 <div
                   key={image.id}
                   className="items"
@@ -67,7 +64,7 @@ const Home = ({ images, loader, setSaved, saved }) => {
           </>
         )}
 
-        {images.length != 0 && (
+        {images.length !== 0 && (
           <a href="#top" className="btn btn-warning my-5">
             Back To Top
           </a>
